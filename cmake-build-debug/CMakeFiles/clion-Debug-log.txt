@@ -1,0 +1,4 @@
+Cannot generate into C:\Users\jabba\Desktop\Morehouse_classes_2024-2025\Data Structures and Algorithms\Data_Structures_Final\cmake-build-debug
+It is already used for project \mnt\c\Users\jabba\Desktop\Morehouse_classes_2024-2025\Data Structures and Algorithms\Data_Structures_Final
+
+Please either delete it manually or select another generation directory
