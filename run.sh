@@ -20,7 +20,7 @@ fi
 make
 if [ $? -eq 0 ]; then
     echo "Build successful! Running the project..."
-    .main.cpp # Replace 'intro_lab' with your actual executable name if different
+    ./Data_Structures_Final  # Replace 'intro_lab' with your actual executable name if different
 else
     echo "Build failed!"
     exit 1

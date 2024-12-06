@@ -1,24 +1,21 @@
-//
-// Created by jabba on 11/24/2024.
-//
-
 #ifndef STACKQUEUE_H
 #define STACKQUEUE_H
 
-#pragma once
 #include "ADTInterface.h"
-#include <queue>
+#include <SFML/Graphics.hpp>
+#include <stack>
 
-class Queue : public ADTInterface {
-private:
-    std::queue<int> q;
+class StackQueue : public ADTInterface {
+    std::stack<int> s1, s2;
 
 public:
-    void insert(int value) override;
-    void remove(int value) override;
+    void enqueue(int value);
+    int dequeue();
     void display() const override;
+    void visualize(sf::RenderWindow& window, sf::Font& font) override; // Add declaration
+    void insert(int value) override { enqueue(value); }
+    void remove(int value) override { dequeue(); }
     void loadFromFile(const std::string& filename) override;
 };
 
-
-#endif //STACKQUEUE_H
+#endif // STACKQUEUE_H

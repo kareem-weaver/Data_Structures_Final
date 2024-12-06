@@ -1,24 +1,20 @@
-//
-// Created by jabba on 11/24/2024.
-//
-
 #ifndef PRIORITYQUEUE_H
 #define PRIORITYQUEUE_H
 
-#pragma once
-#include "ADTInterface.h"
 #include <queue>
+#include <functional>
+#include <vector>
 
-class PriorityQueue : public ADTInterface {
+class PriorityQueue {
 private:
-    std::priority_queue<int> pq;
+    std::priority_queue<int> pq; // Max-heap implementation by default
 
 public:
-    void insert(int value) override;
-    void remove(int value) override;
-    void display() const override;
-    void loadFromFile(const std::string& filename) override;
+    PriorityQueue() {}
+    void insert(int value);
+    void removeTop();
+    int peek() const;
+    void display() const;
 };
 
-
-#endif //PRIORITYQUEUE_H
+#endif // PRIORITYQUEUE_H

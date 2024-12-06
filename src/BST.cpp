@@ -1,134 +1,140 @@
+#include "BST.h"
 #include <SFML/Graphics.hpp>
+#include <iostream>
+#include <fstream>
 
-// Node structure for the BST
-struct Node {
-    int key;
-    Node* left;
-    Node* right;
-    int x, y; // Position for visualization
+BST::BST() : root(nullptr) {}
 
-    Node(int k) : key(k), left(nullptr), right(nullptr), x(0), y(0) {}
-};
+BST::~BST() {
+    deleteTree(root);
+}
 
-// BST Class
-class BST {
-private:
-    Node* root;
+void BST::insert(int value) {
+    insert(root, value);
+}
 
-    // Recursive function to insert a key into the BST
-    Node* insert(Node* node, int key) {
-        if (!node) return new Node(key);
+void BST::remove(int value) {
+    remove(root, value);
+}
 
-        if (key < node->key)
-            node->left = insert(node->left, key);
-        else
-            node->right = insert(node->right, key);
+void BST::display() const {
+    display(root);
+}
 
-        return node;
+void BST::visualize(sf::RenderWindow& window, sf::Font& font) {
+    if (!root) return;
+
+    int x = window.getSize().x / 2; // Start in the center
+    int y = 50; // Start near the top
+    int xOffset = window.getSize().x / 4; // Spacing between levels
+
+    drawTree(root, window, font, x, y, xOffset);
+}
+
+void BST::drawTree(Node* node, sf::RenderWindow& window, sf::Font& font, int x, int y, int xOffset) {
+    if (!node) return;
+
+    // Draw the node as a circle
+    sf::CircleShape circle(20); // Radius = 20
+    circle.setFillColor(sf::Color::Green);
+    circle.setPosition(x - 20, y - 20); // Center the circle
+    window.draw(circle);
+
+    // Draw the node value as text
+    sf::Text text;
+    text.setFont(font);
+    text.setString(std::to_string(node->value));
+    text.setCharacterSize(20);
+    text.setFillColor(sf::Color::White);
+    text.setPosition(x - 10, y - 15);
+    window.draw(text);
+
+    // Draw lines to children and recursively draw them
+    if (node->left) {
+        sf::Vertex line[] = {
+            sf::Vertex(sf::Vector2f(x, y), sf::Color::White),
+            sf::Vertex(sf::Vector2f(x - xOffset, y + 100), sf::Color::White)
+        };
+        window.draw(line, 2, sf::Lines);
+        drawTree(node->left, window, font, x - xOffset, y + 100, xOffset / 2);
     }
 
-    // Recursive function to calculate positions for each node
-    void calculatePositions(Node* node, int x, int y, int xOffset) {
-        if (!node) return;
+    if (node->right) {
+        sf::Vertex line[] = {
+            sf::Vertex(sf::Vector2f(x, y), sf::Color::White),
+            sf::Vertex(sf::Vector2f(x + xOffset, y + 100), sf::Color::White)
+        };
+        window.draw(line, 2, sf::Lines);
+        drawTree(node->right, window, font, x + xOffset, y + 100, xOffset / 2);
+    }
+}
 
-        node->x = x;
-        node->y = y;
-
-        // Recur for left and right children
-        calculatePositions(node->left, x - xOffset, y + 100, xOffset / 2);
-        calculatePositions(node->right, x + xOffset, y + 100, xOffset / 2);
+void BST::loadFromFile(const std::string& filename) {
+    std::ifstream file(filename);
+    if (!file) {
+        std::cerr << "Error: Cannot open file " << filename << std::endl;
+        return;
     }
 
-    // Recursive function to draw the BST
-    void drawTree(Node* node, sf::RenderWindow& window, sf::Font& font) {
-        if (!node) return;
+    int value;
+    while (file >> value) {
+        insert(value);
+    }
+    file.close();
+}
 
-        // Draw edges (lines)
-        if (node->left) {
-            sf::Vertex line[] = {
-                sf::Vertex(sf::Vector2f(node->x, node->y)),
-                sf::Vertex(sf::Vector2f(node->left->x, node->left->y))
-            };
-            window.draw(line, 2, sf::Lines);
+void BST::deleteTree(Node* node) {
+    if (!node) return;
+    deleteTree(node->left);
+    deleteTree(node->right);
+    delete node;
+}
+
+void BST::insert(Node*& node, int value) {
+    if (!node) {
+        node = new Node(value);
+        return;
+    }
+    if (value < node->value) {
+        insert(node->left, value);
+    } else {
+        insert(node->right, value);
+    }
+}
+
+void BST::remove(Node*& node, int value) {
+    if (!node) return;
+
+    if (value < node->value) {
+        remove(node->left, value);
+    } else if (value > node->value) {
+        remove(node->right, value);
+    } else {
+        if (!node->left && !node->right) {
+            delete node;
+            node = nullptr;
+        } else if (node->left && !node->right) {
+            Node* temp = node;
+            node = node->left;
+            delete temp;
+        } else if (!node->left && node->right) {
+            Node* temp = node;
+            node = node->right;
+            delete temp;
+        } else {
+            Node* successor = node->right;
+            while (successor->left) {
+                successor = successor->left;
+            }
+            node->value = successor->value;
+            remove(node->right, successor->value);
         }
-
-        if (node->right) {
-            sf::Vertex line[] = {
-                sf::Vertex(sf::Vector2f(node->x, node->y)),
-                sf::Vertex(sf::Vector2f(node->right->x, node->right->y))
-            };
-            window.draw(line, 2, sf::Lines);
-        }
-
-        // Draw node (circle)
-        sf::CircleShape circle(20);
-        circle.setFillColor(sf::Color::Blue);
-        circle.setPosition(node->x - 20, node->y - 20); // Center the circle
-        window.draw(circle);
-
-        // Draw node value (text)
-        sf::Text text;
-        text.setFont(font);
-        text.setString(std::to_string(node->key));
-        text.setCharacterSize(20);
-        text.setFillColor(sf::Color::White);
-        text.setPosition(node->x - 10, node->y - 15); // Center the text
-        window.draw(text);
-
-        // Recur for left and right children
-        drawTree(node->left, window, font);
-        drawTree(node->right, window, font);
     }
+}
 
-public:
-    BST() : root(nullptr) {}
-
-    // Insert a key into the BST
-    void insert(int key) {
-        root = insert(root, key);
-    }
-
-    // Visualize the BST
-    void visualize(sf::RenderWindow& window, sf::Font& font) {
-        if (!root) return;
-
-        // Calculate positions for each node
-        calculatePositions(root, 400, 50, 200); // Start at root (400, 50) with offset 200
-
-        // Draw the tree
-        drawTree(root, window, font);
-    }
-};
-
-// Main Function
-int main() {
-    sf::RenderWindow window(sf::VideoMode(800, 600), "BST Visualization");
-    sf::Font font;
-    if (!font.loadFromFile("arial.ttf")) {
-        std::cerr << "Error loading font\n";
-        return -1;
-    }
-
-    BST tree;
-    tree.insert(50);
-    tree.insert(30);
-    tree.insert(70);
-    tree.insert(20);
-    tree.insert(40);
-    tree.insert(60);
-    tree.insert(80);
-
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        tree.visualize(window, font); // Visualize the BST
-        window.display();
-    }
-
-    return 0;
+void BST::display(Node* node) const {
+    if (!node) return;
+    display(node->left);
+    std::cout << node->value << " ";
+    display(node->right);
 }
