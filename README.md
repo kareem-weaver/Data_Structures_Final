@@ -52,7 +52,7 @@ This project is an interactive application to visualize various data structures 
 ### **8. B-Tree Deletion Issue**
 - **Problem**: Attempting to delete a node in the B-Tree caused a segmentation fault, as shown in the following image:
 
-![B-Tree Segmentation Fault](![Screenshot 2024-12-10 224905.png])
+![B-Tree Segmentation Fault](https://github.com/user-attachments/assets/e8f109af-402d-4523-890e-f87ea9b005bd)
 
 - **Details**: When trying to remove a node, such as 50, the program crashes due to incorrect handling of pointers during the deletion process.
 - **Resolution**: Further debugging is required to ensure proper pointer management and restructuring of the B-Tree after deletion.
