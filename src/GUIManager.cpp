@@ -4,11 +4,12 @@
 #include "../include/GUIManager.h"
 #include "../include/BST.h"
 #include <limits> // For input validation
-
+#include "../include/PriorityQueue.h"
 // Global Instances
 Stack stackADT;
 Queue queueADT;
 BST bstADT;
+PriorityQueue priorityQueueADT;
 
 // Define the global pointer
 ADTInterface* currentADT = nullptr;
@@ -27,6 +28,10 @@ void selectADT(int option) {
         case 2:
             currentADT = &bstADT;
             std::cout << "BST selected.\n";
+        break;
+        case 3:
+            currentADT = &priorityQueueADT;
+            std::cout << "Priority Queue selected.\n";
         break;
         default:
             std::cerr << "Invalid ADT option.\n";

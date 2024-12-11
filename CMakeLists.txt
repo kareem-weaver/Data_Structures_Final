@@ -8,6 +8,6 @@ add_executable(DataStructuresFinalTest src/main.cpp
         AVL.cpp
         src/BST.cpp
         src/Menu.cpp
-        PriorityQueue.cpp
+        src/PriorityQueue.cpp
         RedBlack.cpp
         src/Stack.cpp)

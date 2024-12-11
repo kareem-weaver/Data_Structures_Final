@@ -10,7 +10,7 @@ int main() {
     std::vector<std::string> mainMenuOptions = {"ADT Selection", "Operations", "Import from File"};
     Menu mainMenu(window.getSize().x, window.getSize().y, mainMenuOptions);
 
-    std::vector<std::string> adtMenuOptions = {"Stack", "Queue", "BST"};
+    std::vector<std::string> adtMenuOptions = {"Stack", "Queue", "BST", "Priority Queue"};
     Menu adtMenu(window.getSize().x, window.getSize().y, adtMenuOptions);
 
     std::vector<std::string> operationsMenuOptions = {"Insert", "Delete", "Display"};
