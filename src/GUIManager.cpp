@@ -69,8 +69,15 @@ void performOperation(int operation) {
             break;
         }
         case 1: {
-            currentADT->remove(0); // 0 is a placeholder since no input is needed
-            std::cout << "Removed the appropriate value from the selected ADT.\n";
+            int value;
+            std::cout << "Enter the number to remove: ";
+            while (!(std::cin >> value)) {
+                std::cerr << "Invalid input. Please enter an integer: ";
+                std::cin.clear(); // Clear the error flag
+                std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // Ignore invalid input
+            }
+            currentADT->remove(value);
+            std::cout << "Removed " << value << " from the selected ADT.\n";
             break;
         }
         break;

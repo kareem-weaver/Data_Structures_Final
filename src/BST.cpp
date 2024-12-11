@@ -1,13 +1,7 @@
-#include "../include/ADTInterface.h"
-#include <SFML/Graphics.hpp>
-#include <string>
 #include "../include/BST.h"
-#include <cmath>
-#include "BST.h"
 #include <iostream>
 #include <fstream>
-#include <sstream>
-#include <cmath> // for circles
+#include <cmath>
 
 BST::BST() : root(nullptr) {}
 
@@ -37,7 +31,7 @@ BST::Node* BST::insertNode(Node* node, int value) {
 }
 
 void BST::remove(int value) {
-    root = removeNode(root, value); // Update the root if needed
+    root = removeNode(root, value);
 }
 
 BST::Node* BST::removeNode(Node* node, int value) {
@@ -47,9 +41,9 @@ BST::Node* BST::removeNode(Node* node, int value) {
     }
 
     if (value < node->data) {
-        node->left = removeNode(node->left, value); // Recur on left subtree
+        node->left = removeNode(node->left, value);
     } else if (value > node->data) {
-        node->right = removeNode(node->right, value); // Recur on right subtree
+        node->right = removeNode(node->right, value);
     } else {
         // Node to be deleted found
         if (!node->left && !node->right) {
