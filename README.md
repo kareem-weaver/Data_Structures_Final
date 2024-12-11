@@ -4,13 +4,12 @@
 This project is an interactive application to visualize various data structures using the **SFML** library. Users can:
 - Select a data structure from a menu.
 - Perform operations like insertion, deletion, and file import.
-- *(Currently in progress)* Visualize the selected data structure.
-
-While the menu and operations are functional, the visual representation of the ADTs is under development due to time constraints.
+- Visualize the selected data structure in an intuitive graphical format.
 
 ---
 
 ## **Features**
+
 ### **Implemented Data Structures**
 - AVL Tree
 - Binary Search Tree (BST)
@@ -22,38 +21,41 @@ While the menu and operations are functional, the visual representation of the A
 
 ### **Functional Menu**
 - Allows users to select an ADT and perform basic operations.
+- Supports dynamic input for insertion and deletion.
 
 ### **File Import**
-- Load data for ADTs from a file.
+- Load data for ADTs from a file for bulk operations.
+
+### **Visualization**
+- Uses SFML to render the data structures graphically, providing a clear representation of their hierarchy and relationships.
 
 ---
 
-## **Challenges**
+## **Challenges Addressed**
 
+### **1. BST Selection Issue**
+- **Problem**: BST was not appearing in the menu or was incorrectly selected.
+- **Resolution**: Added a missing `break` in the `selectADT` function to prevent falling through to the default case.
 
-#### 1. BST Selection Issue:
-- Problem: BST was not appearing in the menu or incorrectly selected.
-Resolution: Added missing break in the selectADT function to prevent falling through to the default case.
+### **2. Deletion in BST**
+- **Problem**: The `remove` operation for BST wasn't prompting for a value and did not delete nodes properly.
+- **Resolution**: Updated `performOperation` to prompt for a value and fixed the `BST::remove` logic to handle all cases (leaf, one child, two children).
 
-#### 2. Deletion in BST Not Working:
-- Problem: The remove operation for BST wasn't prompting for a value and did not delete nodes properly.
-Resolution: Updated performOperation to prompt for a value and fixed the BST::remove logic to handle all cases (leaf, one child, two children).
+### **4. Display for ADTs**
+- **Problem**: ADTs like Stack, Queue, and BST were not rendering properly in the SFML window.
+- **Resolution**: Enhanced `draw` methods for all ADTs to visualize their structures using circles, text, and lines in SFML.
 
-#### 3. Duplicate findMin Definition in BST:
-- Problem: Multiple definitions of findMin caused a compilation error, and private Node access was blocked.
-Resolution: Removed duplicate definitions and ensured findMin was declared and used correctly in the private section.
+### **6. Integration and Compilation Errors**
+- **Problem**: Missing files in compilation commands caused "undefined reference" and linkage errors.
+- **Resolution**: Updated `g++` commands to include all source files and verified correct directory structures.
 
-#### 4. Display for ADTs:
-- Problem: ADTs like Stack, Queue, and BST were not rendering properly in the SFML window.
-Resolution: Enhanced draw methods for all ADTs to visualize their structures using circles, text, and lines in SFML.
+### **8. B-Tree Deletion Issue**
+- **Problem**: Attempting to delete a node in the B-Tree caused a segmentation fault, as shown in the following image:
 
-#### 5. Hardcoded Values in Insert/Remove Operations:
--Problem: Insert and remove operations used fixed values (e.g., 10 or 0), leading to incorrect functionality.
-Resolution: Modified performOperation to prompt the user for dynamic input during these operations.
+![B-Tree Segmentation Fault](![Screenshot 2024-12-10 224905.png])
 
-#### 6. Integration and Compilation Errors:
-- problem: Missing files in compilation commands caused "undefined reference" and linkage errors.
-Resolution: Updated g++ commands to include all source files and verified correct directory structures.
+- **Details**: When trying to remove a node, such as 50, the program crashes due to incorrect handling of pointers during the deletion process.
+- **Resolution**: Further debugging is required to ensure proper pointer management and restructuring of the B-Tree after deletion.
 
 ---
 
@@ -70,3 +72,41 @@ Resolution: Updated g++ commands to include all source files and verified correc
 ```bash
 git clone https://github.com/yourusername/DataStructuresVisualization.git
 cd DataStructuresVisualization
+```
+
+#### **Compile the code**:
+Use the following `g++` command to compile the project:
+```bash
+g++ src/main.cpp src/GUIManager.cpp src/Menu.cpp src/Stack.cpp src/Queue.cpp src/BST.cpp src/PriorityQueue.cpp src/AVL.cpp src/BTree.cpp src/Heap.cpp src/RedBlack.cpp -o ADT_GUI -Iinclude -lsfml-graphics -lsfml-window -lsfml-system
+```
+
+#### **Run the executable**:
+```bash
+./ADT_GUI
+```
+
+---
+
+## **Usage**
+1. Launch the application.
+2. Use the menu to select a data structure.
+3. Perform operations like insertion, deletion, or file loading.
+4. Visualize the changes in real-time.
+
+---
+
+## **Known Issues**
+- Visualization may not scale well for very large data sets.
+- Some ADTs, like B-Tree and Red-Black Tree, require further refinement for edge cases.
+- B-Tree deletion operation causes segmentation faults in certain scenarios.
+
+---
+
+## **Future Enhancements**
+- Improve visualization scaling and layout for larger data sets.
+- Integrate mouse and keyboard interactivity for better user experience.
+
+---
+
+## **Contributors**
+- [Kareem Weaver](https://github.com/kareem-weaver/Data_Structures_Final/tree/main)
