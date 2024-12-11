@@ -9,5 +9,5 @@ add_executable(DataStructuresFinalTest src/main.cpp
         src/BST.cpp
         src/Menu.cpp
         src/PriorityQueue.cpp
-        RedBlack.cpp
+        src/RedBlack.cpp
         src/Stack.cpp)
