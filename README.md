@@ -70,8 +70,8 @@ This project is an interactive application to visualize various data structures 
 
 #### **Clone the repository**:
 ```bash
-git clone https://github.com/yourusername/DataStructuresVisualization.git
-cd DataStructuresVisualization
+git clone git@github.com:kareem-weaver/Data_Structures_Final.git
+cd Data_Structures_Final
 ```
 
 #### **Compile the code**:
