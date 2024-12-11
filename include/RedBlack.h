@@ -10,7 +10,7 @@ public:
     ~RedBlack();
 
     void insert(int value) override;
-    void remove(int value) override;
+    void remove(int value) override; // Node removal
     void loadFromFile(const std::string& filename) override;
     void draw(sf::RenderWindow& window, sf::Font& font) override;
 
@@ -26,17 +26,18 @@ private:
         Node(int value) : data(value), color(RED), parent(nullptr), left(nullptr), right(nullptr) {}
     };
 
-    Node* root;
-    Node* TNULL;
+    Node* root;    // Root of the Red-Black Tree
+    Node* TNULL;   // Null node for Red-Black Tree
 
-    void initializeTNULL();
-    void deleteTree(Node* node);
-    void insertFix(Node* node);
-    void deleteFix(Node* node);
-    void rotateLeft(Node* node);
-    void rotateRight(Node* node);
-    Node* minimum(Node* node);
-    void drawNode(sf::RenderWindow& window, sf::Font& font, Node* node, int x, int y, int offset);
+    void initializeTNULL();        // Initialize the TNULL sentinel node
+    void deleteTree(Node* node);   // Delete all nodes recursively
+    void insertFix(Node* node);    // Fix tree after insertion
+    void deleteFix(Node* node);    // Fix tree after deletion
+    void rotateLeft(Node* node);   // Left rotation
+    void rotateRight(Node* node);  // Right rotation
+    Node* minimum(Node* node);     // Find the minimum value in the subtree
+    void transplant(Node* u, Node* v); // Replace one subtree with another
+    void drawNode(sf::RenderWindow& window, sf::Font& font, Node* node, int x, int y, int offset); // Draw tree visualization
 };
 
 #endif // REDBLACK_H

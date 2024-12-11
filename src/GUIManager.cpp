@@ -8,6 +8,7 @@
 #include "../include/AVL.h"
 #include "../include/BTree.h"
 #include "../include/Heap.h"
+#include "../include/RedBlack.h"
 
 
 // Global Instances
@@ -18,6 +19,7 @@ PriorityQueue priorityQueueADT;
 AVL avlADT;
 BTree btreeADT(3);
 Heap heapADT;
+RedBlack redBlackADT;
 
 // Define the global pointer
 ADTInterface* currentADT = nullptr;
@@ -52,6 +54,10 @@ void selectADT(int option) {
         case 6:
             currentADT = &heapADT;
             std::cout << "Heap selected.\n";
+        break;
+        case 7:
+            currentADT = &redBlackADT;
+            std::cout << "RedBlack selected.\n";
         break;
         default:
             std::cerr << "Invalid ADT option.\n";
