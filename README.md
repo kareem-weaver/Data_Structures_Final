@@ -73,6 +73,13 @@ This project is an interactive application to visualize various data structures 
 git clone git@github.com:kareem-weaver/Data_Structures_Final.git
 cd Data_Structures_Final
 ```
+#### **Update Font Path:**
+
+In src/GUIManager.cpp, update the font file path on line 125 to match the location of your desired font file. For example:
+```
+if (!font.loadFromFile("path/to/your/font.ttf")) {}
+```
+Ensure the path points to a valid .ttf file on your system to avoid runtime errors.
 
 #### **Compile the code**:
 Use the following `g++` command to compile the project:
@@ -84,6 +91,7 @@ g++ src/main.cpp src/GUIManager.cpp src/Menu.cpp src/Stack.cpp src/Queue.cpp src
 ```bash
 ./ADT_GUI
 ```
+navigate with arrow keys.
 
 ---
 
