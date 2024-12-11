@@ -15,6 +15,13 @@ void Stack::pop() {
 }
 
 void Stack::draw(sf::RenderWindow& window, sf::Font& font) {
+    if (stack.empty()) {
+        sf::Text emptyText("Stack is empty.", font, 20);
+        emptyText.setFillColor(sf::Color::Black);
+        emptyText.setPosition(300, 300);
+        window.draw(emptyText);
+        return;
+    }
     sf::Text title("Stack", font, 30);
     title.setPosition(50, 10);
     window.draw(title);

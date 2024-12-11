@@ -4,13 +4,16 @@
 #include "../include/GUIManager.h"
 #include "../include/Menu.h"
 #include "../include/ADTInterface.h"
+#include "../include/AVL.h"
+#include "../include/BTree.h"
+#include "../include/Heap.h"
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(800, 600), "Data Structures GUI");
     std::vector<std::string> mainMenuOptions = {"ADT Selection", "Operations", "Import from File"};
     Menu mainMenu(window.getSize().x, window.getSize().y, mainMenuOptions);
 
-    std::vector<std::string> adtMenuOptions = {"Stack", "Queue", "BST", "Priority Queue"};
+    std::vector<std::string> adtMenuOptions = {"Stack", "Queue", "BST", "Priority Queue", "AVL", "BTree", "Heap"};
     Menu adtMenu(window.getSize().x, window.getSize().y, adtMenuOptions);
 
     std::vector<std::string> operationsMenuOptions = {"Insert", "Delete", "Display"};
