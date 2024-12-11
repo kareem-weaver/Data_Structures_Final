@@ -1,0 +1,60 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-d0094a50bb2071803777.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "3.29"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "DataStructuresFinalTest",
+					"targetIndexes" : 
+					[
+						0
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "DataStructuresFinalTest::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-DataStructuresFinalTest-Debug-3ffdb2dc9a36883ddf57.json",
+					"name" : "DataStructuresFinalTest",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "C:/Users/jabba/Desktop/Morehouse_classes_2024-2025/Data Structures and Algorithms/DataStructuresFinalTest/cmake-build-debug",
+		"source" : "C:/Users/jabba/Desktop/Morehouse_classes_2024-2025/Data Structures and Algorithms/DataStructuresFinalTest"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 7
+	}
+}
