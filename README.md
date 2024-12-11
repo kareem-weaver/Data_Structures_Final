@@ -105,7 +105,7 @@ g++ src/main.cpp src/GUIManager.cpp src/Menu.cpp src/Stack.cpp src/Queue.cpp src
 ## **Future Enhancements**
 - Improve visualization scaling and layout for larger data sets.
 - Integrate mouse and keyboard interactivity for better user experience.
-
+- Add Makefile
 ---
 
 ## **Contributors**
